@@ -87,7 +87,8 @@ const MovieTable = ({...rest}) => {
             padding:    '0.5rem 0',
             overflow:   'none',
             overflowX:  'auto',
-            whitespace: 'nowrap'
+            whitespace: 'nowrap',
+            display: 'block'
         }
     });
 
