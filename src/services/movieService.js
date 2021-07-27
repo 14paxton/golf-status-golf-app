@@ -1,6 +1,6 @@
 import async from "async";
 import {RUBY_FETCH_MOVIE_LIST} from "../util/urls";
-import {fetchDataWithParams} from "../util/externalAPIs";
+import {fetchData, fetchDataWithParams} from "../util/externalAPIs";
 
 export const fetchMovies = async (orderBy, orderDirection, pageSize, page) => {
     let params = {
@@ -10,8 +10,12 @@ export const fetchMovies = async (orderBy, orderDirection, pageSize, page) => {
         page: page
     };
 
-    const response = await getTestMovies(RUBY_FETCH_MOVIE_LIST, params);
-    // const response = await fetchData(RUBY_FETCH_MOVIE_LIST, params);
+    // const response = await getTestMovies();
+    console.log(RUBY_FETCH_MOVIE_LIST)
+    console.log(process)
+    console.log(process.env)
+    console.log(process.env.REACT_APP_APPLICATION_SERVER_URL)
+    const response = await fetchData(RUBY_FETCH_MOVIE_LIST);
     // const response = await fetchDataWithParams(RUBY_FETCH_MOVIE_LIST, params);
     return response?.movieList
            ? response
