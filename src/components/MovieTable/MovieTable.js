@@ -136,7 +136,7 @@ const MovieTable = ({...rest}) => {
                     }}
                     data={movieList
 
-                        //use for async call
+                        //use for async remote data, will only rerender table rows
                         // (query) => {
                         //     return new Promise((resolve, reject) => {
                         //         const {orderBy, orderDirection, page, pageSize} = query;
