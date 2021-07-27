@@ -21,19 +21,19 @@ const PaginationContainer = styled('div')(({ theme }) => ({
 const columns = [
     {
         field:       'name',
-        title:       <span data-qa={'private-groups-group-name-title'}>Movie Name</span>,
+        title:       <span data-qa={'private-movies-movie-name-title'}>Movie Name</span>,
         width:       'auto',
         defaultSort: 'asc',
         render:      (rowData) => (
-            <span data-qa={`private-groups-group-name-cell-${rowData?.tableData?.id}`}>{rowData?.name}</span>
+            <span data-qa={`private-movies-movie-name-cell-${rowData?.tableData?.id}`}>{rowData?.name}</span>
         )
     },
     {
         field:      'releaseDate',
-        title:      <span data-qa={'private-groups-assessment-name-title'}>Release Date</span>,
+        title:      <span data-qa={'private-movies-assessment-name-title'}>Release Date</span>,
         width:      'auto',
         render:     (rowData) => (
-            <span data-qa={`private-groups-assessment-name-cell-${rowData?.tableData?.id}`}>{new Date(rowData?.releaseDate).toLocaleDateString()}</span>
+            <span data-qa={`private-movies-assessment-name-cell-${rowData?.tableData?.id}`}>{new Date(rowData?.releaseDate).toLocaleDateString()}</span>
         ),
         customSort: (a, b) => (dayjs(a?.releaseDate).isBefore(b?.releaseDate)
                                ? -1
@@ -41,18 +41,18 @@ const columns = [
     },
     {
         field:  'rating',
-        title:  <span data-qa={'private-groups-last-updated-title'}>Rating</span>,
+        title:  <span data-qa={'private-movies-last-updated-title'}>Rating</span>,
         width:  'auto',
         render: (rowData) => (
-            <span data-qa={`private-groups-last-updated-cell-${rowData?.tableData?.id}`}>{rowData?.rating}</span>
+            <span data-qa={`private-movies-last-updated-cell-${rowData?.tableData?.id}`}>{rowData?.rating}</span>
         )
     },
     {
         field:  'runTime',
-        title:  <span data-qa={'private-groups-last-updated-title'}>Run Time</span>,
+        title:  <span data-qa={'private-movies-last-updated-title'}>Run Time</span>,
         width:  'auto',
         render: (rowData) => (
-            <span data-qa={`private-groups-last-updated-cell-${rowData?.tableData?.id}`}>{rowData?.runTime}</span>
+            <span data-qa={`private-movies-last-updated-cell-${rowData?.tableData?.id}`}>{rowData?.runTime}</span>
         )
     }
 ];
