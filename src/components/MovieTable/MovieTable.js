@@ -171,7 +171,6 @@ const MovieTable = ({...rest}) => {
                     }}
                     localization={{
                         body: {
-                            //use for async
                             emptyDataSourceMessage: !loadingMovies && !tableRef?.current?.dataManager?.data?.length &&
                                                     <EmptyTable msg1={'Empty Table'} msg2={'No Movies Available'}/>
                         }
