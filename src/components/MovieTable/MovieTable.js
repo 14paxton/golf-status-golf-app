@@ -136,7 +136,7 @@ const MovieTable = ({...rest}) => {
                     }}
                     data={movieList
 
-                        //use for async call
+                        //use for async remote data, will only rerender table rows
                         // (query) => {
                         //     return new Promise((resolve, reject) => {
                         //         const {orderBy, orderDirection, page, pageSize} = query;
@@ -171,7 +171,6 @@ const MovieTable = ({...rest}) => {
                     }}
                     localization={{
                         body: {
-                            //use for async
                             emptyDataSourceMessage: !loadingMovies && !tableRef?.current?.dataManager?.data?.length &&
                                                     <EmptyTable msg1={'Empty Table'} msg2={'No Movies Available'}/>
                         }
