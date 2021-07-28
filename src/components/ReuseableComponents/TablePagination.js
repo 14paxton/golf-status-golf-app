@@ -5,7 +5,7 @@ import InputBase from '@material-ui/core/InputBase';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import {IconButton} from '@material-ui/core';
 import {styled} from '@material-ui/core'
-import tableIcons from "./Util/getTableIcons";
+import tableIcons from "../Util/getTableIcons";
 
 const BootstrapInput = withStyles((theme) => ({
     root:  {

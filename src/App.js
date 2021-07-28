@@ -1,11 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import MovieTable from "./components/MovieTable/MovieTable";
+import ScorCardContainer from "./components/ScoreCard/ScorCardContainer";
 
 function App() {
   return (
     <div className="App">
-          <MovieTable/>
+        <header className="App-header">
+            <ScorCardContainer />
+        </header>
     </div>
   );
 }

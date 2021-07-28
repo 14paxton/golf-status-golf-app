@@ -8,8 +8,8 @@ import {
 import dayjs from 'dayjs';
 import {fetchMovies} from "../../services/movieService";
 import getTableIcons from "../Util/getTableIcons";
-import EmptyTable from "../EmptyTable";
-import TablePagination from "../TablePagination";
+import EmptyTable from "../ReuseableComponents/EmptyTable";
+import TablePagination from "../ReuseableComponents/TablePagination";
 
 const PaginationContainer = styled('div')(({ theme }) => ({
     align: 'center',

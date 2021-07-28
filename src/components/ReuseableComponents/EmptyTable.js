@@ -1,6 +1,6 @@
 import {Card, Typography} from "@material-ui/core";
-import {CenteredContainer} from "./Util/CenteredContainer";
-import {Content} from "./Util/Content";
+import {CenteredContainer} from "../Util/CenteredContainer";
+import {Content} from "../Util/Content";
 
 const EmptyTable = (props) => {
     const { title } = props;
