@@ -38,11 +38,11 @@ const GridLayout = props => {
             </Grid>
             {buttonArray?.map((buttonDataObject, index) => {
                 return (
-                    <Grid item xs={6} align="center">
+                    <Grid item xs={6} align="center" key={`form-button-${index}`}>
                         <Button
                             data-qa={`grid-button-${index}-${buttonDataObject?.label}`}
                             variant="contained"
-                            type={'submit'}
+                           type= {buttonDataObject?.type ? buttonDataObject?.type : 'button'}
                             color={buttonDataObject?.color
                                    ? buttonDataObject?.color
                                    : "primary"}

@@ -10,22 +10,23 @@ const TextBox = ({ parentFormId, inputObject, setFormData, formData }) => {
     const { register, errors } = useFormContext();
     const label = inputObject?.label ? inputObject?.label : '';
 
-    const twoCharError = 'Please type at least 2 characters to search.';
+    const textReg = register(`text-field-${parentFormId}-${inputObject.id}`)
+
 
     return (
         <TextField
             id={`text-field-${parentFormId}-${inputObject.id}`}
-            name={inputObject.id}
-            inputRef={register({
-                minLength: {
-                    value: 2,
-                    message: twoCharError
-                }
-            })}
+            name={`text-field-${parentFormId}-${inputObject.id}`}
+            ref={textReg.ref}
             label={label}
-            onChange={setFormData}
+            onChange={e => {
+                setFormData({[`text-field-${parentFormId}-${inputObject.id}`]: e.target.value})
+                textReg.onChange(e)
+            }}
             margin="normal"
             variant="filled"
+            type={'number'}
+            value={formData && formData[`text-field-${parentFormId}-${inputObject.id}`]}
             error={!!errors?.[inputObject.id]}
             helperText={errors?.[inputObject.id]?.message}
             InputLabelProps={{

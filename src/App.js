@@ -1,5 +1,5 @@
 import './App.css';
-import ScorCardContainer from "./components/ScoreCard/ScorCardContainer";
+import ScorCardContainer from "./components/ScoreCard/ScoreCardContainer";
 
 function App() {
   return (
