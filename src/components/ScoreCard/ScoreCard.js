@@ -1,7 +1,8 @@
 import Tabs from "../ReuseableComponents/Tabs";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import ScoreCardContent from "./ScoreCardContent";
 import {FormProvider, useForm, useFormContext} from "react-hook-form";
+import {FormEnums} from "../Util/enums";
 
 
 const styles = {
@@ -13,9 +14,9 @@ const styles = {
 };
 
 
-const ScoreCard = ({scoreCardFormRef}) => {
+const ScoreCard = ({methods}) => {
+    const formRef = useRef()
     const [golferStats, setGolferStats] = useState();
-    const methods = useForm();
     const {handleSubmit, reset, getValues} = methods;
     const onSubmit = data => console.log(getValues());
     const handleChange = (value) => {
@@ -42,7 +43,7 @@ const ScoreCard = ({scoreCardFormRef}) => {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form id={FormEnums.SCORE_CARD_FORM.enumKey} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
                 <Tabs
                     tabs={tabs}
                     indicatorColor={'primary'}

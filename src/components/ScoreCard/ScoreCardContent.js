@@ -1,6 +1,4 @@
 import FieldsAccordion from "../FormFields/FieldsAccordion";
-import {FormProvider, useForm, useFormContext} from "react-hook-form";
-import {useEffect, useRef, useState} from "react";
 
 const scoreCard = [...Array(9)].map((e, index) => {
     return (

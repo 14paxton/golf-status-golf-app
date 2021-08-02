@@ -17,11 +17,11 @@ const TextBox = ({ parentFormId, inputObject, setFormData, formData }) => {
         <TextField
             id={`text-field-${parentFormId}-${inputObject.id}`}
             name={`text-field-${parentFormId}-${inputObject.id}`}
-            ref={textReg.ref}
+            ref={textReg?.ref}
             label={label}
             onChange={e => {
                 setFormData({[`text-field-${parentFormId}-${inputObject.id}`]: e.target.value})
-                textReg.onChange(e)
+                textReg?.onChange(e)
             }}
             margin="normal"
             variant="filled"

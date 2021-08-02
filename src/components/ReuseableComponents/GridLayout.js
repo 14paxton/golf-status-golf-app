@@ -41,7 +41,9 @@ const GridLayout = props => {
                     <Grid item xs={6} align="center" key={`form-button-${index}`}>
                         <Button
                             data-qa={`grid-button-${index}-${buttonDataObject?.label}`}
+                            id={buttonDataObject?.id}
                             variant="contained"
+                            form={buttonDataObject?.form}
                            type= {buttonDataObject?.type ? buttonDataObject?.type : 'button'}
                             color={buttonDataObject?.color
                                    ? buttonDataObject?.color
