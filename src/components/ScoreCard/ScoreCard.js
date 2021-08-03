@@ -34,7 +34,7 @@ const ScoreCard = ({formRef}) => {
         },
         {
             key:     '2',
-            label:   "Misc.",
+            label:   "Current Standings",
             content: (
                          <div>Current Standings</div>
                      )
