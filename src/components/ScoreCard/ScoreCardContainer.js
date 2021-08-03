@@ -6,8 +6,8 @@ import {useForm, useFormState} from "react-hook-form";
 import {FormEnums} from "../Util/enums";
 
 // fire submit programmatically
-const submitMyForm = (event, formRef)=>{
-    formRef?.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))
+const submitMyForm = (event, formRef) => {
+    formRef?.current?.dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}))
 }
 
 const ScoreCardContainer = () => {
@@ -21,7 +21,7 @@ const ScoreCardContainer = () => {
     const formRef = useRef();
 
     const handleCourseSelectionSubmit = (data) => {
-        if(data && !methods?.formState?.errors?.length){
+        if (data && !methods?.formState?.errors?.length) {
             console.log('submit')
             setStartRound(true)
             setSelectedUsers(data[`multi-select-course-selection-form-availableUsers`])
@@ -39,7 +39,6 @@ const ScoreCardContainer = () => {
         setFormType(COURSE_SELECTION_FORM.enumKey)
         methods.reset()
     }
-
 
 
     const buttonArray = [
@@ -63,7 +62,11 @@ const ScoreCardContainer = () => {
     return (
         <GridLayout buttonArray={buttonArray}>
             {(selectedUsers && selectedCourse && !methods?.formState?.errors?.length && startRound)
-             ? <ScoreCard formRef={formRef}/>
+             ? <ScoreCard
+                 formRef={formRef}
+                 selectedUsers={selectedUsers}
+                 selectedCourse={selectedCourse}
+             />
              : <CourseSelection
                  methods={methods}
                  handleSubmit={handleCourseSelectionSubmit}

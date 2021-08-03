@@ -14,7 +14,7 @@ const styles = {
 };
 
 
-const ScoreCard = ({formRef}) => {
+const ScoreCard = ({formRef, selectedUsers, selectedCourse}) => {
     const methods = useForm();
     const [golferStats, setGolferStats] = useState();
     const {handleSubmit,  getValues} = methods;
@@ -30,6 +30,8 @@ const ScoreCard = ({formRef}) => {
             content: (<ScoreCardContent
                 golferStats={golferStats}
                 setGolferStats={handleChange}
+                selectedUsers={selectedUsers}
+                selectedCourse={selectedCourse}
             />)
         },
         {

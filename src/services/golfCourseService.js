@@ -13,7 +13,8 @@ export const fetchGolfCourses = async () => {
             return {
                 id:            course?.id,
                 name:          `${course?.name?.toLowerCase()?.replace(/\s/g, '')}`,
-                displayOption: `${course?.name}`
+                displayOption: `${course?.name}`,
+                holes:         course.holes
             };
         })
     })
@@ -52,5 +53,5 @@ export const availableCourseObject = {
     type:    'combo',
     label:   "Available Courses",
     choices: [],
-    rules: { required: 'You need to pick a course.'}
+    rules:   {required: 'You need to pick a course.'}
 };
