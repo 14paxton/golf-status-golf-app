@@ -1,4 +1,5 @@
 export const fetchGolfCourses = async () => {
+    const availableCourseList = Object.create(availableCourseObject)
     const courseList = await getTestCourseInfo().then(courses => {
         return courses.map(course => {
             if (course?.holes) {
@@ -17,12 +18,8 @@ export const fetchGolfCourses = async () => {
         })
     })
 
-    return {
-        id:      'availableCourses',
-        type:    'combo',
-        label:   "Available Courses",
-        choices: courseList
-    };
+    availableCourseList.choices = courseList
+    return availableCourseList;
 };
 
 
@@ -50,3 +47,10 @@ async function getTestCourseInfo() {
 }
 
 
+export const availableCourseObject = {
+    id:      'availableCourses',
+    type:    'combo',
+    label:   "Available Courses",
+    choices: [],
+    rules: { required: 'You need to pick a course.'}
+};

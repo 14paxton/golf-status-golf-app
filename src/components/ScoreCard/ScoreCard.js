@@ -1,5 +1,5 @@
 import Tabs from "../ReuseableComponents/Tabs";
-import {useRef, useState} from "react";
+import { useState} from "react";
 import ScoreCardContent from "./ScoreCardContent";
 import {FormProvider, useForm, useFormContext} from "react-hook-form";
 import {FormEnums} from "../Util/enums";
@@ -14,10 +14,10 @@ const styles = {
 };
 
 
-const ScoreCard = ({methods}) => {
-    const formRef = useRef()
+const ScoreCard = ({formRef}) => {
+    const methods = useForm();
     const [golferStats, setGolferStats] = useState();
-    const {handleSubmit, reset, getValues} = methods;
+    const {handleSubmit,  getValues} = methods;
     const onSubmit = data => console.log(getValues());
     const handleChange = (value) => {
         setGolferStats({...getValues(), ...value})
@@ -36,7 +36,7 @@ const ScoreCard = ({methods}) => {
             key:     '2',
             label:   "Misc.",
             content: (
-                         <div>misc</div>
+                         <div>Current Standings</div>
                      )
         }
     ]

@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {useFormContext, Controller} from 'react-hook-form';
 import {createFilterOptions} from '@material-ui/lab/Autocomplete';
+import {ErrorMessage} from '@hookform/error-message';
 
 
 const Autocomplete = withStyles({
@@ -46,9 +47,10 @@ const DropDownSelect = ({parentFormId, inputObject, setFormData, formData}) => {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
-    const {getValues, setValue, control, errors} = useFormContext();
+    const { setValue, control, formState: {errors}} = useFormContext();
     const loading = open && options?.length === 0;
     const label = inputObject.label;
+    const inputId =`combo-input-${parentFormId}-${inputObject.id}`;
     const selectOne = 'Select One';
     const placeHolderText = !!options?.length
                             ? (options.length > 1
@@ -58,31 +60,37 @@ const DropDownSelect = ({parentFormId, inputObject, setFormData, formData}) => {
 
     useEffect(() => {
         setOptions(inputObject.choices);
-        if (inputObject?.choices && formData &&formData[`combo-input-${parentFormId}-${inputObject.id}`]) {
-            const selected = inputObject.choices.find((opt) => opt?.id === formData[`combo-input-${parentFormId}-${inputObject.id}`]);
+        let newSelectedValue
+        if (inputObject?.choices && formData && formData[inputId]) {
+            const selected = inputObject.choices.find((opt) => opt === formData[inputId]);
 
-            setSelectedValue(selected);
-            setValue(`combo-input-${parentFormId}-${inputObject.id}`, selected?.id);
+            newSelectedValue = selected
+            setValue(inputId, selected);
         }
-    }, [formData, getValues, inputObject.choices, inputObject.id, parentFormId, setValue]);
+        setSelectedValue(newSelectedValue
+                         ? newSelectedValue
+                         : null);
+    }, [inputObject, formData]);
 
 
     return (
         <Controller
-            name={`combo-input-${parentFormId}-${inputObject.id}`}
+            name={inputId}
             control={control}
-            defaultValue={formData && formData[`combo-input-${parentFormId}-${inputObject.id}`]}
-
-            //can add validation
-            // rules={{
-                // setValueAs: (value) => value.map((id) => parseFloat(id))
-                // validate: oneUserSelected
-            // }}
-
-            render={({onChange, value, ref, ...props}) => (
+            defaultValue={selectedValue ?? []}
+            rules={inputObject?.rules
+                   ? inputObject?.rules
+                   : {}}
+            shouldUnregister={true}
+            render={({
+                field:      {onChange, onBlur, value, name, ref},
+                fieldState: {invalid, isTouched, isDirty, error},
+                formState,
+                ...props
+            }) => (
                 <Autocomplete
                     data-qa={`${parentFormId}-${inputObject.id}-combo-input`}
-                    id={`combo-text-field-${parentFormId}-${inputObject.id}`}
+                    id={name}
                     open={open}
                     disabled={options?.length <= 1}
                     onOpen={() => {
@@ -93,38 +101,59 @@ const DropDownSelect = ({parentFormId, inputObject, setFormData, formData}) => {
                     }}
                     freeSolo
                     filterOptions={filterOptions}
-                    getOptionSelected={(option, value) => option.id === value.id}
+                    getOptionSelected={(option, val) => option.id === val.id}
                     getOptionLabel={(option) => option.displayOption ?? ''}
                     renderOption={(option) => option?.displayOption ?? ''}
-                    onChange={(e, data) => { onChange(data)}}
+                    onChange={(e, data) => {
+                        setSelectedValue(data)
+                        setFormData({[`${name}`]: data})
+                        onChange(data)
+                    }}
                     options={options}
                     loading={loading}
                     fullWidth
-                    value={selectedValue ?? ''}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label={label}
-                            fullWidth
-                            margin='normal'
-                            variant='filled'
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                            InputProps={{
-                                ...params.InputProps,
-                                endAdornment: (
-                                                  <React.Fragment>
-                                                      {loading
-                                                       ? <CircularProgress color='inherit' size={20}/>
-                                                       : null}
-                                                      {params.InputProps.endAdornment}
-                                                  </React.Fragment>
-                                              )
-                            }}
-                            placeholder={placeHolderText}
-                        />
-                    )}
+
+                    value={selectedValue
+                           ? selectedValue
+                           : ''}
+                    renderInput={(params) =>
+                        (
+                            <TextField
+                                {...params}
+                                label={label}
+                                inputRef={ref}
+                                fullWidth
+                                margin='normal'
+                                variant='filled'
+                                InputLabelProps={{
+                                    shrink: true
+                                }}
+                                InputProps={{
+                                    ...params.InputProps,
+                                    endAdornment: (
+                                                      <React.Fragment>
+                                                          {loading
+                                                           ? <CircularProgress color='inherit' size={20}/>
+                                                           : null}
+                                                          {params.InputProps.endAdornment}
+                                                      </React.Fragment>
+                                                  )
+                                }}
+                                placeholder={placeHolderText}
+                                helperText={
+                                    <ErrorMessage
+                                        errors={errors}
+                                        name={name}
+                                        render={({message}) =>
+                                            (<p style={{textAlign: 'center', color: "red"}}>
+                                                {message}
+                                            </p>)
+                                        }
+                                    />
+                                }
+                            />
+                        )
+                    }
                     {...props}
                 />
             )}
