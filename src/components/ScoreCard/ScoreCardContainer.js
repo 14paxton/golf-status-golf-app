@@ -61,7 +61,7 @@ const ScoreCardContainer = () => {
 
     return (
         <GridLayout buttonArray={buttonArray}>
-            {(selectedUsers && selectedCourse && !methods?.formState?.errors?.length && startRound)
+            {(selectedUsers && selectedCourse && !methods?.formState?.errors?.length && startRound && !selectedUsers[`multi-select-course-selection-form-availableUsers`] && !selectedCourse['combo-input-course-selection-form-availableCourses'])
              ? <ScoreCard
                  formRef={formRef}
                  selectedUsers={selectedUsers}

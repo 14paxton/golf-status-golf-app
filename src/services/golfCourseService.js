@@ -4,6 +4,14 @@ export const fetchGolfCourses = async () => {
         return courses.map(course => {
             if (course?.holes) {
                 const {holes} = course
+
+                //temp create unique id for hole/course relationship
+                 holes.forEach(hole =>{
+                    const newId = (hole.id + course.id) * Math.floor(Math.random() * (599 - 4 )) + 1;
+                     hole.id = newId
+                })
+
+
                 course.holes = holes.sort((a, b) => {
                     return a?.hole < b?.hole
                            ? -1
