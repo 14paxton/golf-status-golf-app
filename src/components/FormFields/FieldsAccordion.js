@@ -28,17 +28,18 @@ const Accordion = withStyles({
 
 const AccordionSummary = withStyles((theme) => ({
     root: {
-        backgroundColor: `${theme.palette.primary[20]}`,
+        backgroundColor: `${theme.palette.primary}`,
         borderBottom: '2px solid rgba(0, 0, 0, .125)',
         marginBottom: 0,
         minHeight: 56,
+        padding: 0,
         width: '100%',
         '&:hover': {
-            backgroundColor: `${theme.palette.primary[40]}`
+            backgroundColor: `${theme.palette.primary}`
         },
         '&$expanded': {
             minHeight: 56,
-            backgroundColor: `${theme.palette.primary[40]}`
+            backgroundColor: `${theme.palette.primary}`
         }
     },
     content: {
@@ -87,7 +88,7 @@ const FieldsAccordion = ({
                     aria-controls={`${fieldsObject.id}-content`}
                     id={`${fieldsObject.id}-header`}
                 >
-                    <Typography variant={'h6'}>{accordionLabel}</Typography>
+                    <Typography variant={'body1'} style={{whiteSpace: 'pre-wrap'}}>{accordionLabel}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <FormControl style={{ margin: theme.spacing(1), width: '100%' }}>

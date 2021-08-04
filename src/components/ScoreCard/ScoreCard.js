@@ -18,8 +18,12 @@ const ScoreCard = ({formRef, selectedUsers, selectedCourse}) => {
     const methods = useForm();
     const [golferStats, setGolferStats] = useState();
     const {handleSubmit,  getValues} = methods;
-    const onSubmit = data => console.log(getValues());
+    const onSubmit = data => {
+        const jsonScoreCard = {[selectedCourse?.displayOption]: {...getValues()}}
+        console.log(jsonScoreCard)
+    };
     const handleChange = (value) => {
+        console.log(getValues())
         setGolferStats({...getValues(), ...value})
     }
 

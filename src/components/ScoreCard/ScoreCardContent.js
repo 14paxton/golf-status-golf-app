@@ -1,5 +1,5 @@
 import FieldsAccordion from "../FormFields/FieldsAccordion";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const buildScoreCard = (selectedCourse, selectedUsers) => {
@@ -7,11 +7,11 @@ const buildScoreCard = (selectedCourse, selectedUsers) => {
         return (
             {
                 scoreCardHoleFormInputs: {
-                    id:             `${selectedCourse.id}-${selectedCourse.name}-hole-${hole?.id}`,
-                    accordionLabel: `HOLE ${hole?.hole} sponsor ${hole?.advertiser}`,
+                    id:             `${hole?.hole}`,
+                    accordionLabel: <span>{`HOLE ${hole?.hole}/  Sponsor: ${hole?.advertiser}/   Par: ${hole?.par}`}</span>,
                     inputs:         selectedUsers.map(user => {
                         return {
-                            id:    `${selectedCourse.id}-${selectedCourse.name}-${hole.id}-${hole?.hole}-${user.id}`,
+                            id:    `${user.displayOption}`,
                             type:  'text',
                             label: user?.displayOption
                         }

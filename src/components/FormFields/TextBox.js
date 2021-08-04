@@ -10,13 +10,13 @@ const TextBox = ({ parentFormId, inputObject, setFormData, formData }) => {
     const { register, errors } = useFormContext();
     const label = inputObject?.label ? inputObject?.label : '';
 
-    const textReg = register(`text-field-${parentFormId}-${inputObject.id}`)
+    const textReg = register(`${parentFormId}.${inputObject.id}`)
 
 
     return (
         <TextField
             id={`text-field-${parentFormId}-${inputObject.id}`}
-            name={`text-field-${parentFormId}-${inputObject.id}`}
+            name={`${parentFormId}.${inputObject.id}`}
             ref={textReg?.ref}
             label={label}
             onChange={e => {
